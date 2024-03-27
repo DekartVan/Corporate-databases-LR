@@ -6,26 +6,26 @@
 Приведём ER-диаграмму базы данных и опишем её более детально:
 **ФОТО**
 * user - таблица содержит информацию о пользователях платформы:
-*   first_name - 
-*   last_name -
-*   phone_number - 
+  *   first_name - 
+  *   last_name -
+  *   phone_number - 
 * profile - таблица содержит данные для входа в профиль пользователя:
-*   username - 
-*   email -
-*   password - 
+  *   username - 
+  *   email -
+  *   password - 
 * game - таблица содержит информацию о играх, размещенных на платформе:
-*   title -
-*   genre -
-*   rating -
-*   number_of_sales -
-*   price -
-*   developer - 
+  *   title -
+  *   genre -
+  *   rating -
+  *   number_of_sales -
+  *   price -
+  *   developer - 
 * feedback - таблица содержит информацию о отзывах от пользователей на игры платформы:
-*   text -
-*   stars - 
+  *   text -
+  *   stars - 
 * session - таблица содержит информацию о нахождении пользователя в сети:
-*   start_session -
-*   end_session - 
+  *   start_session -
+  *   end_session - 
 * payment - таблица содержит информацию о покупках игр на платформе:
-*   cash -
-*   date - 
+  *   cash -
+  *   date - 
