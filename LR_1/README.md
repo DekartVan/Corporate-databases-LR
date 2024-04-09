@@ -4,7 +4,7 @@
 Выбранная мной предметная область - онлайн сервис распространения игр и ПО.
 
 Приведём ER-диаграмму базы данных и опишем её более детально:
-![ER drawio](https://github.com/DekartVan/Corporate-databases-LR/assets/60447026/941590ea-640c-4664-825b-a99fdd9d4d00)
+![ER drawio](https://github.com/DekartVan/Corporate-databases-LR/assets/60447026/77360c53-76c9-4887-a38d-3c297650e9f3)
 1. User:
    - user_id (PK): INT (автоинкремент) - уникальный идентификатор пользователя.
    - first_name: VARCHAR (не может быть NULL) - имя пользователя.
