@@ -4,7 +4,7 @@
 Выбранная мной предметная область - онлайн сервис распространения игр и ПО.
 
 Приведём ER-диаграмму базы данных и опишем её более детально:
-![ER drawio](https://github.com/DekartVan/Corporate-databases-LR/assets/60447026/77360c53-76c9-4887-a38d-3c297650e9f3)
+![изображение](https://github.com/DekartVan/Corporate-databases-LR/assets/60447026/f9eb5aae-0ea5-4812-ac37-f293a5fb94fc)
 1. User:
    - user_id (PK): INT (автоинкремент) - уникальный идентификатор пользователя.
    - first_name: VARCHAR (не может быть NULL) - имя пользователя.
@@ -56,12 +56,13 @@
 ```SQL
 BEGIN;
 
+
 CREATE TABLE IF NOT EXISTS public."user"
 (
     user_id uuid NOT NULL,
     first_name character varying(32) NOT NULL,
     last_name character varying(32) NOT NULL,
-    phone_number character varying(12) NOT NULL,
+    phone_number character varying(32) NOT NULL,
     CONSTRAINT pk_user_id PRIMARY KEY (user_id)
 );
 
@@ -106,8 +107,8 @@ CREATE TABLE IF NOT EXISTS public.game
 CREATE TABLE IF NOT EXISTS public.game_user
 (
     game_id uuid,
-    user_id uuid NOT NULL,
-    feedback_id uuid NOT NULL
+    user_id uuid,
+    feedback_id uuid
 );
 
 ALTER TABLE IF EXISTS public.profile
