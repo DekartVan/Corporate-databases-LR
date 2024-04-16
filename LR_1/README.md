@@ -270,7 +270,7 @@ conn.commit()
 
 # Генерация авторов книг
 authors = []
-for i in range(1, 201):  # Генерация 200 авторов
+for i in range(1, 20001):  # Генерация 2000 авторов
     last_name = fake.last_name()
     first_name = fake.first_name()
     rating = random.randint(1, 10)
@@ -281,7 +281,7 @@ conn.commit()
 
 # Генерация издателей
 publishers = []
-for i in range(1, 51):  # Генерация 50 издателей
+for i in range(1, 1001):  # Генерация 50 издателей
     name = fake.company()
     city = fake.city()
     address = fake.address()
@@ -294,9 +294,9 @@ cur.executemany("INSERT INTO public.publisher (publisher_id, name, city, adress,
 conn.commit()
 
 # Генерация контактных лиц складов
-existing_warehouse_contacts = [i for i in range(1, 51)]  # Существующие контактные лица складов
+existing_warehouse_contacts = [i for i in range(1, 1501)]  # Существующие контактные лица складов
 warehouse_contacts = []
-for i in range(1, 51):  # Генерация 100 контактных лиц складов
+for i in range(1, 1501):  # Генерация 100 контактных лиц складов
     contact_id = existing_warehouse_contacts.pop(random.randint(0, len(existing_warehouse_contacts) - 1))
     last_name = fake.last_name()
     first_name = fake.first_name()
@@ -309,11 +309,11 @@ conn.commit()
 
 # Генерация складов
 warehouses = []
-for i in range(1, 51):  # Генерация 50 складов
+for i in range(1, 1500):  # Генерация 1500 складов
     city = fake.city()
     address = fake.address()
-    size = random.choice(['Small', 'Medium', 'Large'])
-    fk_contact = random.randint(1, 50)  # Ссылка на контактное лицо склада
+    size = random.choice(['S', 'M', 'L'])
+    fk_contact = random.randint(1, 1501)  # Ссылка на контактное лицо склада
     warehouses.append((i, city, address, size, fk_contact))
 # Заполнение таблицы "warehouse"
 cur.executemany("INSERT INTO public.warehouse (warehouse_id, city, adress, size, fk_contact) VALUES (%s, %s, %s, %s, %s)", warehouses)
@@ -321,13 +321,13 @@ conn.commit()
 
 # Генерация книг
 books = []
-for i in range(1, 5001):  # Генерация 5000 книг
+for i in range(1, 5000001):  # Генерация 5000000 книг
     title = fake.text(max_nb_chars=128)
     genre = random.choice(genres)
     rating = random.randint(1, 10)
     author = fake.name()
-    price = round(random.uniform(5.99, 49.99), 2)
-    num_sales = random.randint(100, 10000)
+    price = round(random.uniform(5.99, 99.99), 2)
+    num_sales = random.randint(100, 1000000)
     publisher_id = random.randint(1, 50)  # Ссылка на издателя книги
     author_id = random.randint(1, 200)  # Ссылка на автора книги
     books.append((i, title, genre, rating, author, price, num_sales, publisher_id, genres.index(genre) + 1))
@@ -337,9 +337,9 @@ conn.commit()
 
 # Генерация связей книг с авторами
 book_authors = []
-for i in range(1, 10001):  # Генерация 10000 связей книг с авторами
-    book_id = random.randint(1, 5000)
-    author_id = random.randint(1, 200)
+for i in range(1, 5000001):  # Генерация 5000000 связей книг с авторами
+    book_id = random.randint(1, 5000001)
+    author_id = random.randint(1, 20000)
     book_authors.append((book_id, author_id))
 # Заполнение таблицы "book_author"
 cur.executemany("INSERT INTO public.book_author (book_book_id, author_author_id) VALUES (%s, %s)", book_authors)
@@ -347,10 +347,11 @@ conn.commit()
 
 # Генерация связей книг с складами
 book_warehouses = []
-for i in range(1, 10001):  # Генерация 10000 связей книг с складами
-    book_id = random.randint(1, 5000)
-    warehouse_id = random.randint(1, 50)
+for i in range(1, 5000000):  # Генерация 5000000 связей книг с складами
+    book_id = random.randint(1, 5000000)
+    warehouse_id = random.randint(1, 1499)
     book_warehouses.append((book_id, warehouse_id))
+# Заполнение таблицы "book_warehouse"
 # Заполнение таблицы "book_warehouse"
 cur.executemany("INSERT INTO public.book_warehouse (book_book_id, warehouse_warehouse_id) VALUES (%s, %s)", book_warehouses)
 conn.commit()
@@ -359,3 +360,10 @@ conn.commit()
 cur.close()
 conn.close()
 ```
+---------
+### Оптимизация скорости выполнения запросов к Базе Данным
+Посмотрим на время выполнения всех запросов:
+
+|Номер запроса|1|2|3|4|5|
+|-------------|-|-|-|-|-|
+|Время выполнения, мс|2882|7091|333|5122|1052|
